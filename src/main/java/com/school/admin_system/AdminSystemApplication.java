@@ -1,15 +1,41 @@
 package com.school.admin_system;
 
+import com.school.admin_system.entity.User;
+import com.school.admin_system.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class AdminSystemApplication {
-    
+
     public static void main(String[] args) {
         SpringApplication.run(AdminSystemApplication.class, args);
-        System.out.println("========================================");
-        System.out.println("🚀 School Management System Started!");
-        System.out.println("========================================");
+    }
+
+    @Bean
+    public CommandLineRunner initAdmin(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        return args -> {
+            if (userRepository.findByUsername("admin").isEmpty()) {
+                User admin = new User();
+                admin.setUsername("admin");
+                admin.setEmail("admin@school.com");
+                admin.setPassword(passwordEncoder.encode("admin123"));
+                admin.setRole("ADMIN");
+                admin.setFullName("System Administrator");
+                admin.setIsActive(true);
+                userRepository.save(admin);
+                System.out.println("========================================");
+                System.out.println("✅ Admin user created successfully!");
+                System.out.println("Username: admin");
+                System.out.println("Password: admin123");
+                System.out.println("========================================");
+            } else {
+                System.out.println("Admin user already exists");
+            }
+        };
     }
 }
