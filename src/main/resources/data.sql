@@ -2,9 +2,9 @@
 -- This file runs automatically if spring.sql.init.mode=always
 
 -- Clean existing data (be careful in production!)
-SET FOREIGN_KEY_CHECKS = 0;
+SET REFERENTIAL_INTEGRITY FALSE;
 TRUNCATE TABLE users;
-SET FOREIGN_KEY_CHECKS = 1;
+SET REFERENTIAL_INTEGRITY TRUE;
 
 -- Insert default admin user
 -- Password is 'admin123' encrypted with BCrypt
