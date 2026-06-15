@@ -12,8 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/simple-auth")
-public class SimpleAuthController {
+@RequestMapping("/api/auth")
+public class LoginController {
 
     @Autowired
     private UserRepository userRepository;
@@ -21,27 +21,26 @@ public class SimpleAuthController {
     @PostMapping("/login")
     public Map<String, Object> login(@RequestBody Map<String, String> loginRequest) {
         Map<String, Object> response = new HashMap<>();
-        String username = loginRequest.get("username");
+        String email = loginRequest.get("email");
         String password = loginRequest.get("password");
         
-        User user = userRepository.findByUsername(username).orElse(null);
+        User user = userRepository.findByEmail(email).orElse(null);
         
         if (user == null) {
-            response.put("error", "User not found");
+            response.put("error", "User not found with email: " + email);
             return response;
         }
         
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         if (encoder.matches(password, user.getPassword())) {
             response.put("success", true);
-            response.put("username", user.getUsername());
-            response.put("role", user.getRole());
-            response.put("message", "Login successful! Password matches.");
+            response.put("message", "Login successful!");
+            response.put("email", user.getEmail());
+            response.put("role", user.getRole().toString());
             response.put("userId", user.getId());
+            response.put("isActive", user.getIsActive());
         } else {
-            response.put("error", "Invalid password");
-            response.put("stored_hash_prefix", user.getPassword().substring(0, 20));
-            response.put("message", "Password does not match. Use admin123 as password");
+            response.put("error", "Invalid credentials");
         }
         
         return response;
