@@ -49,6 +49,13 @@
             <version>8.1.0</version>
         </dependency>
         
+        <!-- H2 Database -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        
         <!-- JWT for Spring Boot 3.x -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
