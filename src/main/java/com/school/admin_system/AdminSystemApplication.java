@@ -2,7 +2,6 @@ package com.school.admin_system;
 
 import com.school.admin_system.entity.User;
 import com.school.admin_system.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,13 +27,7 @@ public class AdminSystemApplication {
                 admin.setFullName("System Administrator");
                 admin.setIsActive(true);
                 userRepository.save(admin);
-                System.out.println("========================================");
-                System.out.println("✅ Admin user created successfully!");
-                System.out.println("Username: admin");
-                System.out.println("Password: admin123");
-                System.out.println("========================================");
-            } else {
-                System.out.println("Admin user already exists");
+                System.out.println("✅ Admin user created automatically on startup!");
             }
         };
     }
