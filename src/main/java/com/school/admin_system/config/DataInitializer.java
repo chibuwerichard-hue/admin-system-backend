@@ -1,6 +1,7 @@
 package com.school.admin_system.config;
 
 import com.school.admin_system.entity.User;
+import com.school.admin_system.entity.UserRole;
 import com.school.admin_system.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -19,8 +20,7 @@ public class DataInitializer {
                 User admin = new User();
                 admin.setEmail("admin@school.com");
                 admin.setPassword(passwordEncoder.encode("Admin@123"));
-                admin.setRole("ADMIN");
-                admin.setName("Admin User");
+                admin.setRole(UserRole.ADMIN);
                 userRepository.save(admin);
                 System.out.println("✅ Created Admin user: admin@school.com");
 
@@ -28,8 +28,7 @@ public class DataInitializer {
                 User teacher = new User();
                 teacher.setEmail("teacher@school.com");
                 teacher.setPassword(passwordEncoder.encode("Admin@123"));
-                teacher.setRole("TEACHER");
-                teacher.setName("Teacher User");
+                teacher.setRole(UserRole.TEACHER);
                 userRepository.save(teacher);
                 System.out.println("✅ Created Teacher user: teacher@school.com");
 
@@ -37,8 +36,7 @@ public class DataInitializer {
                 User finance = new User();
                 finance.setEmail("finance@school.com");
                 finance.setPassword(passwordEncoder.encode("Admin@123"));
-                finance.setRole("FINANCE_OFFICER");
-                finance.setName("Finance Officer");
+                finance.setRole(UserRole.FINANCE_OFFICER);
                 userRepository.save(finance);
                 System.out.println("✅ Created Finance user: finance@school.com");
 
@@ -46,8 +44,7 @@ public class DataInitializer {
                 User sports = new User();
                 sports.setEmail("sports@school.com");
                 sports.setPassword(passwordEncoder.encode("Admin@123"));
-                sports.setRole("SPORTS_COORDINATOR");
-                sports.setName("Sports Coordinator");
+                sports.setRole(UserRole.SPORTS_COORDINATOR);
                 userRepository.save(sports);
                 System.out.println("✅ Created Sports user: sports@school.com");
 
